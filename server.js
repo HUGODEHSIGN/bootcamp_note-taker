@@ -11,6 +11,9 @@ const __dirname = path.dirname(__filename);
 const PORT = process.env.PORT || 3001;
 
 const app = express();
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use('/api', api);
 
 // serve static files
