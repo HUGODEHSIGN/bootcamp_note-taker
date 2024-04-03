@@ -13,8 +13,6 @@ notes.get('/', (req, res) => {
 });
 
 notes.post('/', (req, res) => {
-  console.log('post to /api/notes', req.body);
-
   if (req.body) {
     const { title, text } = req.body;
     const newNote = {
