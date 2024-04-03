@@ -14,17 +14,25 @@ notes.get('/', (req, res) => {
 
 notes.post('/', (req, res) => {
   console.log('post to /api/notes', req.body);
-  const { title, text } = req.body;
-  const newNote = {
-    id: uuid(),
-    title,
-    text,
-  };
-  readAndAppend(newNote, './db.json');
+
+  if (req.body) {
+    const { title, text } = req.body;
+    const newNote = {
+      id: uuid(),
+      title,
+      text,
+    };
+    readAndAppend(newNote, './db.json');
+  }
 });
 
 notes.delete('/:id', (req, res) => {
-  console.log('delete note', req.params);
+  const paramsId = req.params.id;
+  readFromFile('./db.json')
+    .then((data) => JSON.parse(data))
+    .then((notes) => notes.filter(({ id }) => id !== paramsId))
+    .then((filteredData) => writeToFile('./db.json', filteredData))
+    .then(() => res.json(`Note deleted successfully`));
 });
 
 export default notes;
