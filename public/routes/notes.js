@@ -23,6 +23,9 @@ notes.post('/', (req, res) => {
       text,
     };
     readAndAppend(newNote, './db.json');
+    res.json(`Note deleted successfully`);
+  } else {
+    res.error('Error when adding note.');
   }
 });
 
@@ -32,7 +35,8 @@ notes.delete('/:id', (req, res) => {
     .then((data) => JSON.parse(data))
     .then((notes) => notes.filter(({ id }) => id !== paramsId))
     .then((filteredData) => writeToFile('./db.json', filteredData))
-    .then(() => res.json(`Note deleted successfully`));
+    .then(() => res.json(`Note deleted successfully`))
+    .catch((err) => res.error(err));
 });
 
 export default notes;

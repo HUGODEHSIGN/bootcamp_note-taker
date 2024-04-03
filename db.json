@@ -8,5 +8,15 @@
         "id": "f07b",
         "title": "Test post",
         "text": "Hi!"
+    },
+    {
+        "id": "ce20",
+        "title": "Add new note test",
+        "text": "asdf"
+    },
+    {
+        "id": "ee75",
+        "title": "add new note",
+        "text": "asdfasdf"
     }
 ]
